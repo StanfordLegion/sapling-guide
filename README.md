@@ -187,6 +187,6 @@ spack external find openmpi
 Sapling is a mixed-mode machine. While SLURM is the default job
 scheduler, users can still use SSH to directly access nodes (and for
 some purposes, may need to do so). Therefore, when you are doing
-something performance-sensitive, please let us know on the #sapling
-channel that you intend to do so. Similarly, please watch the #sapling
+something performance-sensitive, please let us know on the `#sapling`
+channel that you intend to do so. Similarly, please watch the `#sapling`
 channel to make sure you're not stepping on what other users are doing.
