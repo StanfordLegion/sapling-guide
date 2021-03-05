@@ -187,6 +187,16 @@ spack compiler find
 spack external find openmpi
 ```
 
+At that point, you should be able to install Spack packages. E.g.:
+
+```bash
+spack install legion
+```
+
+(Note: you probably *don't* want to do this, because most Legion users
+prefer to be on `master` or `control_replication`, but anyway, it
+should work.)
+
 ### 5. Coordinating with Other Users
 
 Sapling is a mixed-mode machine. While SLURM is the default job
