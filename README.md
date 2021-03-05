@@ -1,6 +1,10 @@
 # Sapling User Guide
 
-## First Time Setup
+This guide is intended for users of Sapling (sapling.stanford.edu). If
+you're a new user, please follow the steps below for first-time
+setup. The rest of the guide describes how to use the machine.
+
+## First-Time Setup
 
 Please follow these steps when you first set up your Sapling account.
 
