@@ -122,18 +122,13 @@ Here's a break-down of the parts in this command:
 
   * `srun`: we're going to launch the job immediately (as opposed to, say,
     via a batch script).
-
   * `-N 1` (a.k.a., `--nodes 1`): request one node.
-
   * `-n 1` (a.k.a., `--ntasks 1`): we're going to run one "task". This
     is the number of processes to launch. In this case because we only
     want one copy of bash to be running.
-
   * `-c 40` (a.k.a., `--cpus-per-task 40`): the number of CPUs per task.
-
   * `--pty`: because it's an interactive job, we want the terminal to be
     set up like an interactive shell. You'd skip this on a batch job.
-
   * `bash`: the command to run. (Replace this with your shell of choice.)
 
 ### 3. Launching Batch Jobs with SLURM
