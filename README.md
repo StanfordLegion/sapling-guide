@@ -172,7 +172,8 @@ c0002.stanford.edu
 
 Reminder: all software should be installed and built on the compute
 nodes themselves. Please run the following in an interactive SLURM job
-(see Section 2 above).
+(see [Launching Interactive
+Jobs](#2-launching-interactive-jobs-with-slurm) above).
 
 Note: these instructions are condensed from the Spack documentation at
 https://spack.readthedocs.io/en/latest/. However for more advanced
