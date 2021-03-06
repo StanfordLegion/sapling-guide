@@ -119,7 +119,7 @@ Sapling, we do this through the SLURM job scheduler.
 To launch an interactive, single-node job (e.g., for building software):
 
 ```bash
-srun -N 1 -n 1 -c 40 --pty bash
+srun -N 1 -n 1 -c 40 -p cpu --pty bash
 ```
 
 Here's a break-down of the parts in this command:
@@ -131,6 +131,9 @@ Here's a break-down of the parts in this command:
     is the number of processes to launch. In this case because we only
     want one copy of bash to be running.
   * `-c 40` (a.k.a., `--cpus-per-task 40`): the number of CPUs per task.
+  * `-p cpu` (a.k.a., `--partition cpu`): select the CPU
+    partition. (Change to `gpu` if you want to use GPU nodes, or skip
+    if you don't care.)
   * `--pty`: because it's an interactive job, we want the terminal to be
     set up like an interactive shell. You'd skip this on a batch job.
   * `bash`: the command to run. (Replace this with your shell of choice.)
@@ -150,11 +153,12 @@ Where `my_batch_script.sh` contains:
 #SBATCH -N 2
 #SBATCH -n 2
 #SBATCH -c 40
+#SBATCH -p cpu
 
 srun hostname
 ```
 
-Note that, because the flags (`-N 2 -n 2 -c 40`) were provided on the
+Note that, because the flags (`-N 2 -n 2 -c 40 -p cpu`) were provided on the
 `SBATCH` lines in the script, it is *not* necessary to provide them
 when calling `srun`. SLURM will automatically pick them up and use
 them for any `srun` commands contained in the script.
