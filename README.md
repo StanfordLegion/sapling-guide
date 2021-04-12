@@ -172,6 +172,21 @@ c0001.stanford.edu
 c0002.stanford.edu
 ```
 
+### Workaround for MPI-SLURM incompatibility
+
+As of this current writing, MPI has not been built with SLURM
+compatibility enabled. That means that Legion, Regent and MPI jobs
+*cannot* be launched with `srun`. A workaround for this is to use
+`mpirun` instead. For example, in a 2 node job, you might do:
+
+```bash
+mpirun -n 2 -npernode 1 -bind-to none ...
+```
+
+Note: Continue to follow the same instructions above for either using
+`salloc` or `sbatch`. The difference is to use `mpirun` instead of
+`srun` to launch the job.
+
 ### 4. Spack
 
 Reminder: all software should be installed and built on the compute
