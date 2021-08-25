@@ -30,7 +30,35 @@ ssh-keygen # just enter an empty password
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-### 4. Questions? Ask on Slack
+### 4. Legion/Regent Quickstart
+
+Depending on whether you need Legion or Regent, generally one of the
+following will get you started with Legion or Regent. Note that it's
+only necessary to follow one of these, depending on what you need.
+
+#### Legion
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/examples/circuit
+LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
+./circuit -ll:gpu 1
+```
+
+#### Regent
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/language
+CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
+./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
+```
+
+### 5. Questions? Ask on Slack
 
 We have a `#sapling` channel on Slack. If you have any questions, that's
 the best place to ask. Also, that is where we will provide announcements
