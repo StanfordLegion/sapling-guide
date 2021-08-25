@@ -30,35 +30,7 @@ ssh-keygen # just enter an empty password
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-### 4. Legion/Regent Quickstart
-
-Depending on whether you need Legion or Regent, generally one of the
-following will get you started with Legion or Regent. Note that it's
-only necessary to follow one of these, depending on what you need.
-
-#### Legion
-
-```bash
-git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
-module load cuda
-cd legion/examples/circuit
-LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
-./circuit -ll:gpu 1
-```
-
-#### Regent
-
-```bash
-git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
-module load cuda
-cd legion/language
-CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
-./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
-```
-
-### 5. Questions? Ask on Slack
+### 4. Questions? Ask on Slack
 
 We have a `#sapling` channel on Slack. If you have any questions, that's
 the best place to ask. Also, that is where we will provide announcements
@@ -124,7 +96,35 @@ machine access instructions.)
 
 Some things to keep in mind while using the machine:
 
-### 1. Module System
+### 1. Quickstart
+
+Depending on whether you need Legion or Regent, generally one of the
+following will get you started with Legion or Regent. Note that it's
+only necessary to follow one of these, depending on what you need.
+
+#### Legion Quickstart
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/examples/circuit
+LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
+./circuit -ll:gpu 1
+```
+
+#### Regent Quickstart
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/language
+CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
+./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
+```
+
+### 2. Module System
 
 Sapling has a very *minimal* module system. The intention is to provide
 compilers, MPI, and SLURM. All other packages should be installed on a
@@ -138,7 +138,7 @@ module load mpi
 module load slurm
 ```
 
-### 2. Launching Interactive Jobs with SLURM
+### 3. Launching Interactive Jobs with SLURM
 
 Because the hardware and software is different on different nodes, it is
 important to build and run all software on the compute nodes. On
@@ -147,7 +147,7 @@ Sapling, we do this through the SLURM job scheduler.
 To launch an interactive, single-node job (e.g., for building software):
 
 ```bash
-srun -N 1 -n 1 -c 40 -p cpu --pty bash
+srun -N 1 -n 1 -c 40 -p cpu --pty bash --login
 ```
 
 Here's a break-down of the parts in this command:
@@ -166,7 +166,7 @@ Here's a break-down of the parts in this command:
     set up like an interactive shell. You'd skip this on a batch job.
   * `bash`: the command to run. (Replace this with your shell of choice.)
 
-### 3. Launching Batch Jobs with SLURM
+### 4. Launching Batch Jobs with SLURM
 
 To launch a batch job, you might do something like the following:
 
@@ -215,7 +215,7 @@ Note: Continue to follow the same instructions above for either using
 `salloc` or `sbatch`. The difference is to use `mpirun` instead of
 `srun` to launch the job.
 
-### 4. Spack
+### 5. Spack
 
 Reminder: all software should be installed and built on the compute
 nodes themselves. Please run the following in an interactive SLURM job
@@ -244,7 +244,7 @@ spack install legion
 prefer to be on `master` or `control_replication`, but anyway, it
 should work.)
 
-### 5. Coordinating with Other Users
+### 6. Coordinating with Other Users
 
 Sapling is a mixed-mode machine. While SLURM is the default job
 scheduler, users can still use SSH to directly access nodes (and for
