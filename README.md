@@ -37,6 +37,33 @@ the best place to ask. Also, that is where we will provide announcements
 when there are changes, maintenance, etc. for the machine. (Please ask
 to be added if you are not already on our Slack instance.)
 
+## Quickstart
+
+These instructions are the fastest way to get started with Legion or
+Regent on Sapling.
+
+### 1. Legion Quickstart
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/examples/circuit
+LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
+./circuit -ll:gpu 1
+```
+
+### 2. Regent Quickstart
+
+```bash
+git clone -b master https://github.com/StanfordLegion/legion.git
+srun -N 1 -p gpu --exclusive --pty bash --login
+module load cuda
+cd legion/language
+CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
+./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
+```
+
 ## Machine Layout
 
 Sapling consists of four sets of nodes:
@@ -91,33 +118,6 @@ When you log in, you'll get to the head node. Note that, because it uses
 a different architecture from the CPU/GPU nodes, it is probably best to
 use one of those nodes to build and run your software. (See below for
 machine access instructions.)
-
-## Quickstart
-
-These instructions are the fastest way to get started with Legion or
-Regent on Sapling.
-
-### 1. Legion Quickstart
-
-```bash
-git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
-module load cuda
-cd legion/examples/circuit
-LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
-./circuit -ll:gpu 1
-```
-
-### 2. Regent Quickstart
-
-```bash
-git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
-module load cuda
-cd legion/language
-CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
-./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
-```
 
 ## Using the Machine
 
