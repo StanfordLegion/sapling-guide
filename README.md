@@ -92,17 +92,12 @@ a different architecture from the CPU/GPU nodes, it is probably best to
 use one of those nodes to build and run your software. (See below for
 machine access instructions.)
 
-## Using the Machine
+## Quickstart
 
-Some things to keep in mind while using the machine:
+These instructions are the fastest way to get started with Legion or
+Regent on Sapling.
 
-### 1. Quickstart
-
-Depending on whether you need Legion or Regent, generally one of the
-following will get you started with Legion or Regent. Note that it's
-only necessary to follow one of these, depending on what you need.
-
-#### Legion Quickstart
+### 1. Legion Quickstart
 
 ```bash
 git clone -b master https://github.com/StanfordLegion/legion.git
@@ -113,7 +108,7 @@ LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
 ./circuit -ll:gpu 1
 ```
 
-#### Regent Quickstart
+### 2. Regent Quickstart
 
 ```bash
 git clone -b master https://github.com/StanfordLegion/legion.git
@@ -124,7 +119,11 @@ CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.p
 ./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
 ```
 
-### 2. Module System
+## Using the Machine
+
+Some things to keep in mind while using the machine:
+
+### 1. Module System
 
 Sapling has a very *minimal* module system. The intention is to provide
 compilers, MPI, and SLURM. All other packages should be installed on a
@@ -138,7 +137,14 @@ module load mpi
 module load slurm
 ```
 
-### 3. Launching Interactive Jobs with SLURM
+Some additional modules are only available on the compute nodes. E.g.,
+on the GPU nodes, CUDA is available via:
+
+```bash
+module load cuda
+```
+
+### 2. Launching Interactive Jobs with SLURM
 
 Because the hardware and software is different on different nodes, it is
 important to build and run all software on the compute nodes. On
@@ -166,7 +172,7 @@ Here's a break-down of the parts in this command:
     set up like an interactive shell. You'd skip this on a batch job.
   * `bash`: the command to run. (Replace this with your shell of choice.)
 
-### 4. Launching Batch Jobs with SLURM
+### 3. Launching Batch Jobs with SLURM
 
 To launch a batch job, you might do something like the following:
 
@@ -200,7 +206,7 @@ c0001.stanford.edu
 c0002.stanford.edu
 ```
 
-### Workaround for MPI-SLURM incompatibility
+### 4. Workaround for MPI-SLURM incompatibility
 
 As of this current writing, MPI has not been built with SLURM
 compatibility enabled. That means that Legion, Regent and MPI jobs
