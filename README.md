@@ -258,3 +258,30 @@ some purposes, may need to do so). Therefore, when you are doing
 something performance-sensitive, please let us know on the `#sapling`
 channel that you intend to do so. Similarly, please watch the `#sapling`
 channel to make sure you're not stepping on what other users are doing.
+
+## Administration
+
+How to...
+
+### 1. Install/Reinstall/Upgrade CUDA Driver
+
+Contact `action@cs`. They installed the CUDA driver originally on the
+`g000*` nodes, and know how to upgrade it.
+
+For posterity, here is the upgrade procedure used (as of 2022-09-15)&mdash;but you can let the admins do this:
+
+```
+wget https://us.download.nvidia.com/XFree86/Linux-x86_64/515.65.01/NVIDIA-Linux-x86_64-515.65.01.run
+systemctl stop nvidia-persistenced.service
+chmod +x NVIDIA-Linux-x86_64-515.65.01.run
+./NVIDIA-Linux-x86_64-515.65.01.run --uninstall
+./NVIDIA-Linux-x86_64-515.65.01.run -q -a -n -X -s
+systemctl start nvidia-persistenced.service
+```
+
+### 2. Upgrade Linux Kernel
+
+Run `apt update && apt upgrade && sudo reboot`.
+
+**Important:** check the status of the NVIDIA driver after this. If
+`nvidia-smi` breaks, see above.
