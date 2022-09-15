@@ -268,7 +268,8 @@ How to...
 Contact `action@cs`. They installed the CUDA driver originally on the
 `g000*` nodes, and know how to upgrade it.
 
-For posterity, here is the upgrade procedure used (as of 2022-09-15)&mdash;but you can let the admins do this:
+For posterity, here is the upgrade procedure used (as of
+2022-09-15)&mdash;but you can let the admins do this:
 
 ```
 wget https://us.download.nvidia.com/XFree86/Linux-x86_64/515.65.01/NVIDIA-Linux-x86_64-515.65.01.run
@@ -285,3 +286,9 @@ Run `apt update && apt upgrade && sudo reboot`.
 
 **Important:** check the status of the NVIDIA driver after this. If
 `nvidia-smi` breaks, see above.
+
+### 3. Install Docker
+
+We are responsible for maintaining Docker on the compute nodes.
+
+See `admin/install_docker.sh`.
