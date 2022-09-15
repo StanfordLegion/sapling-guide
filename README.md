@@ -292,3 +292,9 @@ Run `apt update && apt upgrade && sudo reboot`.
 We are responsible for maintaining Docker on the compute nodes.
 
 See `admin/install_docker.sh`.
+
+### 4. Install GitLab Runner
+
+We are responsible for maintaining GitLab Runner on the compute nodes.
+
+See `admin/gitlab` for some sample scripts.
