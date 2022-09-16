@@ -291,10 +291,23 @@ Run `apt update && apt upgrade && sudo reboot`.
 
 We are responsible for maintaining Docker on the compute nodes.
 
-See `admin/install_docker.sh`.
+```bash
+admin/install_docker.sh
+```
 
 ### 4. Install GitLab Runner
 
 We are responsible for maintaining GitLab Runner on the compute nodes.
 
 See `admin/gitlab` for some sample scripts.
+
+### 5. Install CUDA Toolkit
+
+Note: this is different than the driver (see above). This is only for
+the compiler and user tools.
+
+```bash
+admin/install_cuda_toolkit.sh
+admin/install_cudnn.sh # note: requires download (see file)
+sudo cp admin/cuda/modules/11.7 /usr/local/modules/cuda/
+```
