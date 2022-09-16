@@ -263,7 +263,7 @@ channel to make sure you're not stepping on what other users are doing.
 
 How to...
 
-### 1. Install/Reinstall/Upgrade CUDA Driver
+### 1. Upgrade CUDA Driver
 
 Contact `action@cs`. They installed the CUDA driver originally on the
 `g000*` nodes, and know how to upgrade it.
@@ -280,14 +280,31 @@ chmod +x NVIDIA-Linux-x86_64-515.65.01.run
 systemctl start nvidia-persistenced.service
 ```
 
-### 2. Upgrade Linux Kernel
+### 2. Install CUDA Toolkit
 
-Run `apt update && apt upgrade && sudo reboot`.
+We can do this ourselves. Note: for the driver, see above.
+
+```bash
+admin/install_cuda_toolkit.sh
+admin/install_cudnn.sh # note: requires download (see script)
+sudo cp admin/cuda/modules/11.7 /usr/local/modules/cuda/
+```
+
+### 3. Upgrade Linux Kernel (or System Software)
+
+We can do this ourselves, but watch out for potential upgrade hazards
+(e.g., GCC minor version updates, Linux kernel upgrades).
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo reboot
+```
 
 **Important:** check the status of the NVIDIA driver after this. If
 `nvidia-smi` breaks, see above.
 
-### 3. Install Docker
+### 4. Install Docker
 
 We are responsible for maintaining Docker on the compute nodes.
 
@@ -295,19 +312,8 @@ We are responsible for maintaining Docker on the compute nodes.
 admin/install_docker.sh
 ```
 
-### 4. Install GitLab Runner
+### 5. Install GitLab Runner
 
 We are responsible for maintaining GitLab Runner on the compute nodes.
 
 See `admin/gitlab` for some sample scripts.
-
-### 5. Install CUDA Toolkit
-
-Note: this is different than the driver (see above). This is only for
-the compiler and user tools.
-
-```bash
-admin/install_cuda_toolkit.sh
-admin/install_cudnn.sh # note: requires download (see file)
-sudo cp admin/cuda/modules/11.7 /usr/local/modules/cuda/
-```
