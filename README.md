@@ -318,7 +318,78 @@ We are responsible for maintaining GitLab Runner on the compute nodes.
 
 See `admin/gitlab` for some sample scripts.
 
-### 6. Troubleshoot SLURM Jobs
+### 6. Reboot Nodes
+
+There are three ways to reboot nodes, with progressively more
+aggressive settings:
+
+  * **Soft reboot.** SSH to the node and run:
+
+    ```bash
+    sudo reboot
+    ```
+
+    IMPORTANT: be sure you are on the compute node and **not the head
+    node** when you do this. Otherwise you will kill the machine for
+    everyone.
+
+    In some cases, I've seen nodes not come back after a soft reboot,
+    so a hard reboot may be required. Or if the node is out of memory,
+    it may not be possible to get a shell on the node to run `sudo
+    reboot` from.
+
+  * **Hard reboot.** Run:
+
+    ```
+    ipmitool -U IPMI_USER -H c0001-ipmi -I lanplus chassis power cycle
+    ```
+
+    Be sure to change `IPMI_USER` to your IPMI username (different
+    from your regular username!) and `c0001` to the node you want to
+    reboot.
+
+    This cuts power to the node and restarts it. There is also a soft
+    reboot setting with `soft`, but I do not think it is particularly
+    useful compared to `sudo reboot` (though it does not require SSH).
+
+  * Otherwise, contact `action@cs`. It may be that there is a hardware
+    issue preventing the node from coming back up.
+
+### 7. Manage SLURM Node State
+
+Check the state of SLURM nodes with:
+
+```bash
+sinfo
+```
+
+To set the SLURM state of a node to `S`:
+
+```bash
+sudo /usr/local/slurm-20.11.4/bin/scontrol update NodeName=c0001 State=S
+```
+
+Here are some states you might find useful:
+
+  * `DRAIN`: This prevents any further jobs from being scheduled on
+    the node, but allows current jobs to complete. Recommended when
+    you want to do maintenance but don't want to disrupt jobs on the
+    system.
+
+  * `DOWN`: This kills any jobs currently running on the node and
+    prevents further jobs from running. This is usually not required,
+    but may be useful if something gets really messed up and the job
+    cannot be killed by the system.
+
+  * `RESUME`: Makes the node available to schedule jobs. Note that any
+    issues have to be resolved *before* doing this, or else the node
+    will just go back into the `DOWN` state again.
+
+For `DRAIN` and `DOWN` states, a `Reason` argument is also
+required. Please use this to indicate why the node is down (e.g.,
+maintenance).
+
+### 8. Troubleshoot SLURM Jobs
 
  1. Jobs do not complete, but remain in the `CG` (completing) state.
 
@@ -346,3 +417,7 @@ See `admin/gitlab` for some sample scripts.
     `/var/log/syslog` is unlikely to be helpful at default SLURM
     logging levels. You can `/etc/slurm.conf` to define log files and
     levels to allow you to get more information if you need to.
+
+    Once the issue is resolved, the node state will usually fix
+    itself, but if that doesn't happen, you can force it to reset by
+    setting the node to `DOWN` and then `RESUME` again (see above).
