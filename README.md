@@ -317,3 +317,32 @@ admin/install_docker.sh
 We are responsible for maintaining GitLab Runner on the compute nodes.
 
 See `admin/gitlab` for some sample scripts.
+
+### 6. Troubleshoot SLURM Jobs
+
+ 1. Jobs do not complete, but remain in the `CG` (completing) state.
+
+    There seem to be two possible causes for this:
+
+      * Either there is something wrong with the compute node itself
+        (e.g., out of memory) that is preventing it from killing the
+        job, or
+
+      * There is some sort of a network issue. For example, we have
+        seen DNS issues that created these symptoms. If `ping sapling`
+        fails or connects to `127.0.1.1` instead of the head node,
+        this is the likely culprit.
+
+    Remember that SLURM itself will keep retrying to clear the
+    completing job, so if it stays in the queue, it's because of an
+    ongoing (not just one-time) issue.
+
+    Steps to diagnose:
+
+      * SSH to the failing node and see if it looks healthy (`htop`).
+
+      * Try `ping sapling` from the compute node and see if it works.
+
+    `/var/log/syslog` is unlikely to be helpful at default SLURM
+    logging levels. You can `/etc/slurm.conf` to define log files and
+    levels to allow you to get more information if you need to.
