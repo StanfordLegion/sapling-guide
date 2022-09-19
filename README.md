@@ -355,6 +355,15 @@ aggressive settings:
   * Otherwise, contact `action@cs`. It may be that there is a hardware
     issue preventing the node from coming back up.
 
+**After rebooting a compute node** be sure to check the SLURM daemon
+status to make sure it is up. (Usually it is not and has to be started
+manually.)
+
+```bash
+sudo service slurmd status
+sudo service slurmd start # if necessary
+```
+
 ### 7. Manage SLURM Node State
 
 Check the state of SLURM nodes with:
