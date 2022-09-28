@@ -30,12 +30,12 @@ ssh-keygen # just enter an empty password
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-### 4. Questions? Ask on Slack
+### 4. Questions? Ask on Zulip
 
-We have a `#sapling` channel on Slack. If you have any questions, that's
+We have a `#sapling` stream on Zulip. If you have any questions, that's
 the best place to ask. Also, that is where we will provide announcements
 when there are changes, maintenance, etc. for the machine. (Please ask
-to be added if you are not already on our Slack instance.)
+for the signup link if you are not already on our Zulip instance.)
 
 ## Quickstart
 
