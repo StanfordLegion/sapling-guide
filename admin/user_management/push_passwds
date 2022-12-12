@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#set -e
+#set -x
+
+#NODES="n0000 n0001 n0002 n0003 n0004"
+#NODES="n0000 n0001 n0002 n0003"
+NODES="n0000 n0001 n0002"
+NODES+=" c0001 c0002 c0003 c0004"
+NODES+=" g0001 g0002 g0003 g0004"
+#NODES="g0004"
+
+unset SSH_AUTH_SOCK
+
+#sudo -v
+
+for n in $NODES
+do
+  echo $n
+  # order of files matters here
+  cat /etc/passwd | ssh -x root@$n /home/sean/bin/update_passwds /etc/passwd $*
+  cat /etc/shadow | ssh -x root@$n /home/sean/bin/update_passwds /etc/shadow -i /etc/passwd $*
+  cat /etc/group | ssh -x root@$n /home/sean/bin/update_passwds /etc/group $*
+  cat /etc/gshadow | ssh -x root@$n /home/sean/bin/update_passwds /etc/gshadow -i /etc/group $*
+done
