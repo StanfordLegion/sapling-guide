@@ -312,7 +312,12 @@ We are responsible for maintaining Docker on the compute nodes.
 admin/install_docker.sh
 ```
 
+Do **NOT** add users to to the `docker` group. This is equivalent to
+adding them to `sudo`. Instead see rootless setup below.
+
 #### 4.1 Rootless Docker
+
+From: https://docs.docker.com/engine/security/rootless/
 
 Install `uidmap` utility:
 
