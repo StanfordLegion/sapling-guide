@@ -312,6 +312,60 @@ We are responsible for maintaining Docker on the compute nodes.
 admin/install_docker.sh
 ```
 
+#### 4.1 Rootless Docker
+
+Install `uidmap` utility:
+
+```bash
+sudo apt update
+sudo apt install uidmap
+```
+
+Create a range of at least 65536 UIDs/GIDs for the user in
+`/etc/subuid` and `/etc/subgid`:
+
+```
+$ cat /etc/subuid
+test_docker:655360:65536
+$ cat /etc/subgid
+test_docker:655360:65536
+```
+
+**Within the user account,** run:
+
+```bash
+dockerd-rootless-setuptool.sh install
+```
+
+Make sure to export the variables printed by the command above. E.g.:
+
+```bash
+export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+```
+
+Relocate Docker's internal storage into `/tmp/$USER` to avoid issues
+with NFS:
+
+```bash
+mkdir /tmp/$USER
+echo '{"data-root":"/tmp/'$USER'"}' > ~/.config/docker/daemon.json
+systemctl --user stop docker
+systemctl --user start docker
+```
+
+Try running a container:
+
+```bash
+docker run -ti ubuntu:22.04
+```
+
+Clean up old containers (WARNING: may delete data):
+
+```bash
+docker container prune
+```
+
 ### 5. Install GitLab Runner
 
 We are responsible for maintaining GitLab Runner on the compute nodes.
