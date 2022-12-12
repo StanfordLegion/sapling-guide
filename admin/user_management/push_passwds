@@ -22,4 +22,6 @@ do
   cat /etc/shadow | ssh -x root@$n /home/sean/bin/update_passwds /etc/shadow -i /etc/passwd $*
   cat /etc/group | ssh -x root@$n /home/sean/bin/update_passwds /etc/group $*
   cat /etc/gshadow | ssh -x root@$n /home/sean/bin/update_passwds /etc/gshadow -i /etc/group $*
+  cat /etc/subuid | ssh -x root@$n /home/sean/bin/update_passwds /etc/subuid -i /etc/passwd $*
+  cat /etc/subgid | ssh -x root@$n /home/sean/bin/update_passwds /etc/subgid -i /etc/group $*
 done
