@@ -339,8 +339,14 @@ test_docker:655360:65536
 **Within the user account,** run:
 
 ```bash
+salloc -n 1 -N 1 -c 40 -p gpu --exclusive
+ssh $SLURM_NODELIST
 dockerd-rootless-setuptool.sh install
 ```
+
+(The SSH is required because user-level systemctl seems to be highly
+sensitive to how you log into the node. Otherwise you'll get an error
+saying "systemd not detected".)
 
 Make sure to export the variables printed by the command above. E.g.:
 
