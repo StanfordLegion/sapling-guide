@@ -52,7 +52,7 @@ Machines:
   * `H2`: new head node
   * `G`: one GPU compute node, for initial testing
   * `RN`: remaining CPU/GPU compute nodes (i.e., `c` and `g` nodes, not `n` nodes)
-  * ON: older CPU nodes (i.e., `n` nodes)
+  * `ON`: older CPU nodes (i.e., `n` nodes)
 
 ### Part 1. Spin Up New Head Node
 
@@ -109,7 +109,7 @@ this node before performing the rest of the migration.
       4. `CS`: Configure NSF on `RN` such that it can access all of `H2`'s drives
       5. `LP`: Configure SLURM/MPI/CUDA/Docker/modules on `RN`
       6. `LP`: Verify that jobs are able to be launched on `RN`
-28. For the older ON nodes:
+28. For the older `ON` nodes:
       1. `CS`: Connect them to the new network/IPMI/DNS/etc., but do **NOT** upgrade the OS. They will remain on Ubuntu 20.04
 29. `LP`: Re-enable CI jobs on `RN`
 30. `LP`: Re-enable GitHub mirror script
