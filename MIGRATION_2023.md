@@ -80,7 +80,7 @@ Machines:
 ### Part 3. Initial Migration Testing
 
 Choose one compute node (probably a GPU node) to move over to the new
-`H2` configurations. Call this machine G. We will test everything with
+`H2` configurations. Call this machine `G`. We will test everything with
 this node before performing the rest of the migration.
 
 14. `CS`: Install Ubuntu 22.04 base OS on `G`
