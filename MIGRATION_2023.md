@@ -93,7 +93,7 @@ this node before performing the rest of the migration.
 21. CS: Make a final copy of H1's `/home` into H2 `/scratch3/oldhome`
 22. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch3/oldscratch2`
 23. LP: Verify and confirm
-24. UR: **CAN BEGIN UES OF H2**
+24. UR: **CAN BEGIN USE OF H2**
 
 ### Part 5. Final Migration Steps
 
