@@ -18,7 +18,7 @@ main groups are:
   * Hardware installation and maintenance
   * Base OS installation
   * DNS
-  * NFS
+  * Filesystems (including NFS)
   * CUDA drivers (if applicable), but NOT CUDA toolkit/software
 
 ### Responsibilities of Legion Project Members
