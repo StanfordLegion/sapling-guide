@@ -106,6 +106,7 @@ this node before performing the rest of the migration.
       4. LP: Configure SLURM/MPI/CUDA/Docker/modules on RN
       5. LP: Verify that jobs are able to be launched on RN
 26. LP: Re-enable CI jobs on RN
+30. LP: Re-enable GitHub mirror script
 27. UR: Verify and confirm final configuration
 28. CS: Make H2 available under sapling.stanford.edu
 29. LP/UR: Verify and confirm
