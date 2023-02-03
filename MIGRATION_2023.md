@@ -91,8 +91,8 @@ this node before performing the rest of the migration.
 ### Part 4. Flag Day: Critical Migration Steps
 
 20. UR: **STOP USING H1 FOR ALL JOBS**
-21. CS: Make a final copy of H1's `/home` into H2 `/scratch3/oldhome`
-22. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch3/oldscratch2`
+21. CS: Make a final copy of H1's `/home` into H2 `/scratch1/oldhome`
+22. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch1/oldscratch2`
 23. LP: Verify and confirm
 24. UR: **CAN BEGIN USE OF H2**
 
