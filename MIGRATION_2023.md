@@ -55,14 +55,15 @@ Machines:
 ### Part 1. Spin Up New Head Node
 
  1. CS: Install Ubuntu 22.04 base OS on H2
- 2. CS: Make H2 available via IPMI as sapling2.stanford.edu
- 3. CS: Make H2 available via SSH as sapling2.stanford.edu
- 4. CS: Set up DNS on H2 such that it can access H1 and compute nodes
- 5. CS: Configure disks on H2:
+ 2. CS: Make H2 available via private IPMI as head2-ipmi
+ 3. CS: Make H2 available via public DNS as sapling2.stanford.edu
+ 4. CS: Make H2 available via public SSH
+ 5. CS: Set up DNS on H2 such that it can access H1 and compute nodes
+ 6. CS: Configure disks on H2:
       * One SSD as `/home`
       * Other SSDs/HDDs should be set up as `/scratchN` where `N` starts at 3
- 6. LP: Verify configuration
- 7. LP: Verify that H2 can be rebooted through `sudo reboot` or similar without losing access or any critical services
+ 7. LP: Verify configuration
+ 8. LP: Verify that H2 can be rebooted through `sudo reboot` or similar without losing access or any critical services
 
 ### Part 2. Install Basic Services
 
