@@ -42,75 +42,78 @@ simplify the instructions.
 
 Roles:
 
-  * CS: Stanford CS staff
-  * LP: Legion project members
-  * UR: Users
+  * `CS`: Stanford CS staff
+  * `LP`: Legion project members
+  * `UR`: Users
 
 Machines:
 
-  * H1: old head node
-  * H2: new head node
-  * G: one GPU compute node, for initial testing
-  * RN: remaining CPU/GPU compute nodes
+  * `H1`: old head node
+  * `H2`: new head node
+  * `G`: one GPU compute node, for initial testing
+  * `RN`: remaining CPU/GPU compute nodes (i.e., `c` and `g` nodes, not `n` nodes)
+  * ON: older CPU nodes (i.e., `n` nodes)
 
 ### Part 1. Spin Up New Head Node
 
- 1. CS: Install Ubuntu 22.04 base OS on H2
- 2. CS: Make H2 available via private IPMI as head2-ipmi
- 3. CS: Make H2 available via public DNS as sapling2.stanford.edu
- 4. CS: Make H2 available via public SSH
- 5. CS: Set up DNS on H2 such that it can access H1 and compute nodes
- 6. CS: Configure disks on H2:
+ 1. `CS`: Install Ubuntu 22.04 base OS on `H2`
+ 2. `CS`: Make `H2` available via private IPMI as head2-ipmi
+ 3. `CS`: Make `H2` available via public DNS as sapling2.stanford.edu
+ 4. `CS`: Make `H2` available via public SSH
+ 5. `CS`: Set up DNS on `H2` such that it can access `H1` and compute nodes
+ 6. `CS`: Configure disks on `H2`:
       * One 8 TB SSD as `/home`
       * Other SSDs/HDDs should be set up as `/scratchN` where `N` starts at 1
- 7. CS: Copy `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow`, `/etc/subuid`, `/etc/subgid` from H1 to H2
- 7. LP: Verify and confirm
- 8. LP: Verify that H2 can be rebooted through `sudo reboot` or similar without losing access or any critical services
+ 7. `CS`: Copy `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow`, `/etc/subuid`, `/etc/subgid` from `H1` to `H2`
+ 7. `LP`: Verify and confirm
+ 8. `LP`: Verify that `H2` can be rebooted through `sudo reboot` or similar without losing access or any critical services
 
 ### Part 2. Install Basic Services
 
- 8. LP: Install SLURM
- 9. LP: Install MPI
-10. LP: Install CUDA toolkit
-11. LP: Install Docker
-12. LP: Install HTTP server
-13. LP: Install module system
+ 8. `LP`: Install SLURM
+ 9. `LP`: Install MPI
+10. `LP`: Install CUDA toolkit
+11. `LP`: Install Docker
+12. `LP`: Install HTTP server
+13. `LP`: Install module system
 
 ### Part 3. Initial Migration Testing
 
 Choose one compute node (probably a GPU node) to move over to the new
-H2 configurations. Call this machine G. We will test everything with
+`H2` configurations. Call this machine G. We will test everything with
 this node before performing the rest of the migration.
 
-14. CS: Install Ubuntu 22.04 base OS on G
-15. CS: Install device drivers (CUDA, Infiniband, etc.)
-16. CS: Configure IPMI and basic network services on G
-17. CS: Configure NSF on G such that it can access all of H2's drives
-18. LP: Configure SLURM/MPI/CUDA/Docker/modules on G
-19. LP: Verify that jobs are able to be launched on G
-20. UR: Verify H2 and G access and software
+14. `CS`: Install Ubuntu 22.04 base OS on `G`
+15. `CS`: Install device drivers (CUDA, Infiniband, etc.)
+16. `CS`: Configure IPMI and basic network services on `G`
+17. `CS`: Configure NSF on `G` such that it can access all of `H2`'s drives
+18. `LP`: Configure SLURM/MPI/CUDA/Docker/modules on `G`
+19. `LP`: Verify that jobs are able to be launched on `G`
+20. `UR`: Verify `H2` and `G` access and software
 
 ### Part 4. Flag Day: Critical Migration Steps
 
-21. UR: **STOP USING H1 FOR ALL JOBS**
-22. CS: Make a final copy of H1's `/home` into H2 `/scratch1/oldhome`
-23. CS: Make a final copy of H1'2 `/scratch` into H2 `/scratch1/oldscratch`
-24. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch1/oldscratch2`
-25. LP: Verify and confirm
-26. UR: **CAN BEGIN USE OF H2**
+21. `UR`: **STOP USING `H1` FOR ALL JOBS**
+22. `CS`: Make a final copy of `H1`'s `/home` into `H2` `/scratch1/oldhome`
+23. `CS`: Make a final copy of `H1`'2 `/scratch` into `H2` `/scratch1/oldscratch`
+24. `CS`: Make a final copy of `H1`'2 `/scratch2` into `H2` `/scratch1/oldscratch2`
+25. `LP`: Verify and confirm
+26. `UR`: **CAN BEGIN USE OF `H2`**
 
 ### Part 5. Final Migration Steps
 
-27. For each remaining compute node RN:
-      1. CS: Install Ubuntu 22.04 base OS on RN
-      2. CS: Install device drivers (CUDA, Infiniband, etc.)
-      3. CS: Configure IPMI and basic network services on RN
-      4. CS: Configure NSF on RN such that it can access all of H2's drives
-      5. LP: Configure SLURM/MPI/CUDA/Docker/modules on RN
-      6. LP: Verify that jobs are able to be launched on RN
-28. LP: Re-enable CI jobs on RN
-29. LP: Re-enable GitHub mirror script
-30. UR: Verify and confirm final configuration
-31. CS: Make H2 available under sapling.stanford.edu
-32. LP/UR: Verify and confirm
-33. CS: H1 can be decomissioned
+27. For each remaining compute node `RN`:
+      1. `CS`: Install Ubuntu 22.04 base OS on `RN`
+      2. `CS`: Install device drivers (CUDA, Infiniband, etc.)
+      3. `CS`: Configure IPMI and basic network services on `RN`
+      4. `CS`: Configure NSF on `RN` such that it can access all of `H2`'s drives
+      5. `LP`: Configure SLURM/MPI/CUDA/Docker/modules on `RN`
+      6. `LP`: Verify that jobs are able to be launched on `RN`
+28. For the older ON nodes:
+      1. `CS`: Connect them to the new network/IPMI/DNS/etc., but do **NOT** upgrade the OS. They will remain on Ubuntu 20.04
+29. `LP`: Re-enable CI jobs on `RN`
+30. `LP`: Re-enable GitHub mirror script
+31. `UR`: Verify and confirm final configuration
+32. `CS`: Make `H2` available under sapling.stanford.edu
+33. `LP`/`UR`: Verify and confirm
+34. `CS`: `H1` can be decomissioned
