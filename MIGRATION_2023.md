@@ -19,7 +19,8 @@ main groups are:
   * Base OS installation
   * DNS
   * Filesystems (including NFS)
-  * CUDA drivers (if applicable), but NOT CUDA toolkit/software
+  * CUDA drivers (if applicable), but **NOT** CUDA toolkit/software
+  * Infiniband: OFED, nvidia-fm, p2p rdma, etc.
 
 ### Responsibilities of Legion Project Members
 
@@ -82,32 +83,34 @@ H2 configurations. Call this machine G. We will test everything with
 this node before performing the rest of the migration.
 
 14. CS: Install Ubuntu 22.04 base OS on G
-15. CS: Configure IPMI and basic network services on G
-16. CS: Configure NSF on G such that it can access all of H2's drives
-17. LP: Configure SLURM/MPI/CUDA/Docker/modules on G
-18. LP: Verify that jobs are able to be launched on G
-19. UR: Verify H2 and G access and software
+15. CS: Install device drivers (CUDA, Infiniband, etc.)
+16. CS: Configure IPMI and basic network services on G
+17. CS: Configure NSF on G such that it can access all of H2's drives
+18. LP: Configure SLURM/MPI/CUDA/Docker/modules on G
+19. LP: Verify that jobs are able to be launched on G
+20. UR: Verify H2 and G access and software
 
 ### Part 4. Flag Day: Critical Migration Steps
 
-20. UR: **STOP USING H1 FOR ALL JOBS**
-21. CS: Make a final copy of H1's `/home` into H2 `/scratch1/oldhome`
-22. CS: Make a final copy of H1'2 `/scratch` into H2 `/scratch1/oldscratch`
-22. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch1/oldscratch2`
-23. LP: Verify and confirm
-24. UR: **CAN BEGIN USE OF H2**
+21. UR: **STOP USING H1 FOR ALL JOBS**
+22. CS: Make a final copy of H1's `/home` into H2 `/scratch1/oldhome`
+23. CS: Make a final copy of H1'2 `/scratch` into H2 `/scratch1/oldscratch`
+24. CS: Make a final copy of H1'2 `/scratch2` into H2 `/scratch1/oldscratch2`
+25. LP: Verify and confirm
+26. UR: **CAN BEGIN USE OF H2**
 
 ### Part 5. Final Migration Steps
 
-25. For each remaining compute node RN:
+27. For each remaining compute node RN:
       1. CS: Install Ubuntu 22.04 base OS on RN
-      2. CS: Configure IPMI and basic network services on RN
-      3. CS: Configure NSF on RN such that it can access all of H2's drives
-      4. LP: Configure SLURM/MPI/CUDA/Docker/modules on RN
-      5. LP: Verify that jobs are able to be launched on RN
-26. LP: Re-enable CI jobs on RN
-30. LP: Re-enable GitHub mirror script
-27. UR: Verify and confirm final configuration
-28. CS: Make H2 available under sapling.stanford.edu
-29. LP/UR: Verify and confirm
-30. CS: H1 can be decomissioned
+      2. CS: Install device drivers (CUDA, Infiniband, etc.)
+      3. CS: Configure IPMI and basic network services on RN
+      4. CS: Configure NSF on RN such that it can access all of H2's drives
+      5. LP: Configure SLURM/MPI/CUDA/Docker/modules on RN
+      6. LP: Verify that jobs are able to be launched on RN
+28. LP: Re-enable CI jobs on RN
+29. LP: Re-enable GitHub mirror script
+30. UR: Verify and confirm final configuration
+31. CS: Make H2 available under sapling.stanford.edu
+32. LP/UR: Verify and confirm
+33. CS: H1 can be decomissioned
