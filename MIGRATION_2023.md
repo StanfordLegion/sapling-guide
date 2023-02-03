@@ -9,7 +9,7 @@ February 2023
 I'd like propose the following division of responsibilities. The three
 main groups are:
 
- 1. Stanford CS Staff (Andrej, Brian)
+ 1. Stanford CS Staff (Andrej, Brian, Jimmy)
  2. Legion Project Members (Elliott, etc.)
  3. Sapling Users
 
@@ -60,7 +60,7 @@ Machines:
  4. CS: Make H2 available via public SSH
  5. CS: Set up DNS on H2 such that it can access H1 and compute nodes
  6. CS: Configure disks on H2:
-      * One SSD as `/home`
+      * One 8 TB SSD as `/home`
       * Other SSDs/HDDs should be set up as `/scratchN` where `N` starts at 3
  7. LP: Verify configuration
  8. LP: Verify that H2 can be rebooted through `sudo reboot` or similar without losing access or any critical services
