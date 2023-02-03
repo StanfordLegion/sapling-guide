@@ -9,9 +9,9 @@ February 2023
 I'd like propose the following division of responsibilities. The three
 main groups are:
 
- 1. Stanford CS Staff (Andrej, Brian, Jimmy)
- 2. Legion Project Members (Elliott, etc.)
- 3. Sapling Users
+ 1. Stanford CS staff (Andrej, Brian, Jimmy)
+ 2. Legion project members responsible for administering the machine (Elliott, etc.)
+ 3. Sapling users
 
 ### Responsbilities of Stanford CS Staff
 
@@ -41,8 +41,8 @@ simplify the instructions.
 
 Roles:
 
-  * CS: Stanford CS Staff
-  * LP: Legion Project Members
+  * CS: Stanford CS staff
+  * LP: Legion project members
   * UR: Users
 
 Machines:
