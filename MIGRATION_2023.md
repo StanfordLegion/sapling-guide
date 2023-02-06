@@ -63,8 +63,8 @@ Machines:
  6. `CS`: Configure disks on `H2`:
       * One 8 TB SSD as `/home`
       * Other SSDs/HDDs should be set up as `/scratchN` where `N` starts at 1
- 7. `LP`: Copy `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow`, `/etc/subuid`, `/etc/subgid` from `H1` to `H2`
  7. `LP`: Verify and confirm
+ 7. `LP`: Copy `/etc/passwd`, `/etc/shadow`, `/etc/group`, `/etc/gshadow`, `/etc/subuid`, `/etc/subgid` from `H1` to `H2`
  8. `LP`: Verify that `H2` can be rebooted through `sudo reboot` or similar without losing access or any critical services
 
 ### Part 2. Install Basic Services
