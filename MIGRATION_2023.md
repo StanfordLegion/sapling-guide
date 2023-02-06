@@ -50,7 +50,7 @@ Machines:
 
   * `H1`: old head node
   * `H2`: new head node
-  * `G`: one GPU compute node, for initial testing
+  * `GN`: one GPU compute node, for initial testing
   * `RN`: all remaining compute nodes
 
 ### Part 1. Spin Up New Head Node
@@ -79,15 +79,15 @@ Machines:
 ### Part 3. Initial Migration Testing
 
 Choose one compute node (probably a GPU node) to move over to the new
-`H2` configurations. Call this machine `G`. We will test everything with
+`H2` configurations. Call this machine `GN`. We will test everything with
 this node before performing the rest of the migration.
 
 14. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
-15. `CS`: Configure network (IPMI, DHCP, DNS) on `G`
-16. `CS`: Configure NFS on `G` to access `H2`'s drives (and remove access to `H1`'s drives)
-17. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `G`
-18. `LP`: Verify that jobs are able to be launched on `G`
-19. `UR`: Verify `H2` and `G` access and software
+15. `CS`: Configure network (IPMI, DHCP, DNS) on `GN`
+16. `CS`: Configure NFS on `GN` to access `H2`'s drives (and remove access to `H1`'s drives)
+17. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `GN`
+18. `LP`: Verify that jobs are able to be launched on `GN`
+19. `UR`: Verify `H2` and `GN` access and software
 
 ### Part 4. Flag Day: Critical Migration Steps
 
@@ -102,10 +102,10 @@ this node before performing the rest of the migration.
 
 27. For each remaining compute node `RN`:
      1. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
-     2. `CS`: Configure network (IPMI, DHCP, DNS) on `G`
-     3. `CS`: Configure NFS on `G` to access `H2`'s drives (and remove access to `H1`'s drives)
-     4. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `G`
-     5. `LP`: Verify that jobs are able to be launched on `G`
+     2. `CS`: Configure network (IPMI, DHCP, DNS) on `RN`
+     3. `CS`: Configure NFS on `RN` to access `H2`'s drives (and remove access to `H1`'s drives)
+     4. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `RN`
+     5. `LP`: Verify that jobs are able to be launched on `RN`
 29. `LP`: Re-enable CI jobs on `RN`
 30. `LP`: Re-enable GitHub mirror script
 31. `UR`: Verify and confirm final configuration
