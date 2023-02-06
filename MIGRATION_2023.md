@@ -91,24 +91,24 @@ this node before performing the rest of the migration.
 
 ### Part 4. Flag Day: Critical Migration Steps
 
-21. `UR`: **STOP USING `H1` FOR ALL JOBS**
-22. `CS`: Make a final copy of `H1`'s `/home` into `H2` `/scratch1/oldhome`
-23. `CS`: Make a final copy of `H1`'2 `/scratch` into `H2` `/scratch1/oldscratch`
-24. `CS`: Make a final copy of `H1`'2 `/scratch2` into `H2` `/scratch1/oldscratch2`
-25. `LP`: Verify and confirm
-26. `UR`: **CAN BEGIN USE OF `H2`**
+20. `UR`: **STOP USING `H1` FOR ALL JOBS**
+21. `CS`: Make a final copy of `H1`'s `/home` into `H2` `/scratch1/oldhome`
+22. `CS`: Make a final copy of `H1`'2 `/scratch` into `H2` `/scratch1/oldscratch`
+23. `CS`: Make a final copy of `H1`'2 `/scratch2` into `H2` `/scratch1/oldscratch2`
+24. `LP`: Verify and confirm
+25. `UR`: **CAN BEGIN USE OF `H2`**
 
 ### Part 5. Final Migration Steps
 
-27. For each remaining compute node `RN`:
+26. For each remaining compute node `RN`:
      1. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
      2. `CS`: Configure network (IPMI, DHCP, DNS) on `RN`
      3. `CS`: Configure NFS on `RN` to access `H2`'s drives (and remove access to `H1`'s drives)
      4. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `RN`
      5. `LP`: Verify that jobs are able to be launched on `RN`
-29. `LP`: Re-enable CI jobs on `RN`
-30. `LP`: Re-enable GitHub mirror script
-31. `UR`: Verify and confirm final configuration
-32. `CS`: Make `H2` available under sapling.stanford.edu
-33. `LP`/`UR`: Verify and confirm
-34. `CS`: `H1` can be decomissioned
+27. `LP`: Re-enable CI jobs on `RN`
+28. `LP`: Re-enable GitHub mirror script
+29. `UR`: Verify and confirm final configuration
+30. `CS`: Make `H2` available under sapling.stanford.edu
+31. `LP`/`UR`: Verify and confirm
+32. `CS`: `H1` can be decomissioned
