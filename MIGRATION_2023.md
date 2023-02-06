@@ -51,12 +51,11 @@ Machines:
   * `H1`: old head node
   * `H2`: new head node
   * `G`: one GPU compute node, for initial testing
-  * `RN`: remaining CPU/GPU compute nodes (i.e., `c` and `g` nodes, not `n` nodes)
-  * `ON`: older CPU nodes (i.e., `n` nodes)
+  * `RN`: all remaining compute nodes
 
 ### Part 1. Spin Up New Head Node
 
- 1. `CS`: Install Ubuntu 22.04 base OS on `H2`
+ 1. `CS`: Install Ubuntu 20.04 base OS on `H2`
  2. `CS`: Make `H2` available via private IPMI as head2-ipmi
  3. `CS`: Make `H2` available via public DNS as sapling2.stanford.edu
  4. `CS`: Make `H2` available via public SSH
@@ -83,13 +82,12 @@ Choose one compute node (probably a GPU node) to move over to the new
 `H2` configurations. Call this machine `G`. We will test everything with
 this node before performing the rest of the migration.
 
-14. `CS`: Install Ubuntu 22.04 base OS on `G`
-15. `CS`: Install device drivers (CUDA, Infiniband, etc.)
-16. `CS`: Configure IPMI and basic network services on `G`
-17. `CS`: Configure NSF on `G` such that it can access all of `H2`'s drives
-18. `LP`: Configure SLURM/MPI/CUDA/Docker/modules on `G`
-19. `LP`: Verify that jobs are able to be launched on `G`
-20. `UR`: Verify `H2` and `G` access and software
+14. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
+15. `CS`: Configure network (IPMI, DHCP, DNS) on `G`
+16. `CS`: Configure NFS on `G` to access `H2`'s drives (and remove access to `H1`'s drives)
+17. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `G`
+18. `LP`: Verify that jobs are able to be launched on `G`
+19. `UR`: Verify `H2` and `G` access and software
 
 ### Part 4. Flag Day: Critical Migration Steps
 
@@ -103,14 +101,11 @@ this node before performing the rest of the migration.
 ### Part 5. Final Migration Steps
 
 27. For each remaining compute node `RN`:
-      1. `CS`: Install Ubuntu 22.04 base OS on `RN`
-      2. `CS`: Install device drivers (CUDA, Infiniband, etc.)
-      3. `CS`: Configure IPMI and basic network services on `RN`
-      4. `CS`: Configure NSF on `RN` such that it can access all of `H2`'s drives
-      5. `LP`: Configure SLURM/MPI/CUDA/Docker/modules on `RN`
-      6. `LP`: Verify that jobs are able to be launched on `RN`
-28. For the older `ON` nodes:
-      1. `CS`: Connect them to the new network/IPMI/DNS/etc., but do **NOT** upgrade the OS. They will remain on Ubuntu 20.04
+     1. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
+     2. `CS`: Configure network (IPMI, DHCP, DNS) on `G`
+     3. `CS`: Configure NFS on `G` to access `H2`'s drives (and remove access to `H1`'s drives)
+     4. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `G`
+     5. `LP`: Verify that jobs are able to be launched on `G`
 29. `LP`: Re-enable CI jobs on `RN`
 30. `LP`: Re-enable GitHub mirror script
 31. `UR`: Verify and confirm final configuration
