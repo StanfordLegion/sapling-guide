@@ -16,7 +16,7 @@ package_list=(
     libevent-dev
 
     # SLURM
-    munge # authentication
+    munge libmunge-dev # authentication
 )
 sudo apt update -qq
 sudo apt install -y "${package_list[@]}"
