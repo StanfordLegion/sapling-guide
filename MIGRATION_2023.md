@@ -18,6 +18,7 @@ main groups are:
   * Hardware installation and maintenance
   * Base OS installation
   * DNS
+  * Time (NTP via time.stanford.edu)
   * Filesystems (including NFS)
   * CUDA drivers (if applicable), but **NOT** CUDA toolkit/software
   * Infiniband: OFED, nvidia-fm, p2p rdma, etc.
@@ -83,7 +84,7 @@ Choose one compute node (probably a GPU node) to move over to the new
 this node before performing the rest of the migration.
 
 14. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
-15. `CS`: Configure network (IPMI, DHCP, DNS) on `GN`
+15. `CS`: Configure network (IPMI, DHCP, DNS, NTP) on `GN`
 16. `CS`: Configure NFS on `GN` to access `H2`'s drives (and remove access to `H1`'s drives)
 17. `LP`: Configure SLURM/MPI/CUDA/Docker/CMake/modules on `GN`
 18. `LP`: Verify that jobs are able to be launched on `GN`
