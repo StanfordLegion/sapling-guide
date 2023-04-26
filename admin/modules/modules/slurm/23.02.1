@@ -1,0 +1,8 @@
+#%Module 1.0
+
+conflict slurm
+
+set slurm_root /usr/local/slurm-23.02.1
+
+append-path PATH ${slurm_root}/bin
+append-path MANPATH ${slurm_root}/share/man
