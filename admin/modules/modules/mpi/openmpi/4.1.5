@@ -1,0 +1,13 @@
+#%Module 1.0
+
+conflict mpi
+
+set ompi_root /usr/local/openmpi-4.1.5
+
+setenv MPI_ROOT ${ompi_root}
+# prepend because mpicc is often installed in /usr/bin/... as well
+prepend-path PATH ${ompi_root}/bin
+append-path LD_LIBRARY_PATH ${ompi_root}/lib
+
+# OMPI 4 doesn't want to use verbs by default
+setenv OMPI_MCA_btl_openib_allow_ib 1
