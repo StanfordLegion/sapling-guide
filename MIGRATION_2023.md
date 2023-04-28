@@ -22,6 +22,7 @@ main groups are:
   * Filesystems (including NFS)
   * CUDA drivers (if applicable), but **NOT** CUDA toolkit/software
   * Infiniband: OFED, nvidia-fm, p2p rdma, etc.
+  * SSL certificates
 
 ### Responsibilities of Legion Project Members
 
