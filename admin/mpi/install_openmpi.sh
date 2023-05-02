@@ -29,3 +29,6 @@ if [[ ! -d /usr/local/openmpi-4.1.5 ]]; then
     sudo make install
     popd
 fi
+# pack for deployment
+rm -f install-openmpi-4.1.5.tar.gz
+tar cfz install-openmpi-4.1.5.tar.gz /usr/local/openmpi-4.1.5
