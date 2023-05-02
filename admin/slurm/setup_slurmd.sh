@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 root_dir=$(readlink -f $(dirname "${BASH_SOURCE[0]}"))
 
 # install SLURM dependencies
