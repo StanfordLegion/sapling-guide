@@ -17,6 +17,7 @@ if [[ ! -d /usr/local/openmpi-4.1.5 ]]; then
     mpi_config_flags=(
 	--prefix=/usr/local/openmpi-4.1.5
 	--with-hwloc=/usr/local/hwloc-2.9.1
+	--with-libevent=external
 	--with-pmix=/usr/local/pmix-4.1.1
         --enable-orterun-prefix-by-default
         --with-verbs
