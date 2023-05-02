@@ -40,6 +40,9 @@ if [[ ! -d /usr/local/hwloc-2.9.1 ]]; then
     sudo make install
     popd
 fi
+# pack for deployment
+rm install-hwloc-2.9.1.tar.gz
+tar cfz install-hwloc-2.9.1.tar.gz /usr/local/hwloc-2.9.1
 
 if [[ ! -d pmix-4.1.1 ]]; then
     wget -nv https://github.com/openpmix/openpmix/releases/download/v4.1.1/pmix-4.1.1.tar.bz2
@@ -58,6 +61,9 @@ if [[ ! -d /usr/local/pmix-4.1.1 ]]; then
     sudo make install
     popd
 fi
+# pack for deployment
+rm install-pmix-4.1.1.tar.gz
+tar cfz install-pmix-4.1.1.tar.gz /usr/local/pmix-4.1.1
 
 if [[ ! -f slurm-23.02.1.tar.bz2 ]]; then
     wget -nv https://download.schedmd.com/slurm/slurm-23.02.1.tar.bz2
@@ -83,3 +89,6 @@ if [[ ! -d /usr/local/slurm-23.02.1 ]]; then
     sudo make install
     popd
 fi
+# pack for deployment
+rm install-slurm-23.02.1.tar.gz
+tar cfz install-slurm-23.02.1.tar.gz /usr/local/slurm-23.02.1
