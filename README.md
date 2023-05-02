@@ -26,8 +26,8 @@ This will help make access to the machine nodes easier, so that when you
 run jobs you don't need to enter your password.
 
 ```bash
-ssh-keygen # just enter an empty password
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+ssh-keygen -t ed25519 # just enter an empty password
+cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
 
 ### 4. Questions? Ask on Zulip
