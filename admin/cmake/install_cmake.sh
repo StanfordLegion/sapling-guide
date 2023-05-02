@@ -10,5 +10,5 @@ if [[ ! -f cmake-3.26.3-linux-x86_64.tar.gz ]]; then
 fi
 
 if [[ ! -d /usr/local/cmake-3.26.3 ]]; then
-    tar xf cmake-3.26.3-linux-x86_64.tar.gz -C /usr/local/cmake-3.26.3 --strip-components 1
+    sudo tar xfv cmake-3.26.3-linux-x86_64.tar.gz -C /usr/local/cmake-3.26.3 --strip-components 1
 fi
