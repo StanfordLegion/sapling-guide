@@ -41,7 +41,7 @@ if [[ ! -d /usr/local/hwloc-2.9.1 ]]; then
     popd
 fi
 # pack for deployment
-rm install-hwloc-2.9.1.tar.gz
+rm  -f install-hwloc-2.9.1.tar.gz
 tar cfz install-hwloc-2.9.1.tar.gz /usr/local/hwloc-2.9.1
 
 if [[ ! -d pmix-4.1.1 ]]; then
@@ -62,7 +62,7 @@ if [[ ! -d /usr/local/pmix-4.1.1 ]]; then
     popd
 fi
 # pack for deployment
-rm install-pmix-4.1.1.tar.gz
+rm -f install-pmix-4.1.1.tar.gz
 tar cfz install-pmix-4.1.1.tar.gz /usr/local/pmix-4.1.1
 
 if [[ ! -f slurm-23.02.1.tar.bz2 ]]; then
@@ -90,5 +90,5 @@ if [[ ! -d /usr/local/slurm-23.02.1 ]]; then
     popd
 fi
 # pack for deployment
-rm install-slurm-23.02.1.tar.gz
+rm -f install-slurm-23.02.1.tar.gz
 tar cfz install-slurm-23.02.1.tar.gz /usr/local/slurm-23.02.1
