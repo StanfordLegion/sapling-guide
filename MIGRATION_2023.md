@@ -112,7 +112,7 @@ this node before performing the rest of the migration.
      1. Copy `H1`'s `/scratch2` into `H2` `/scratch/sapling1/scratch2`
 25. `UR`: **CAN BEGIN USE OF `H2`**
 
-### Part 5. Final Migration Steps
+### Part 6. Final Migration Steps
 
 26. `LP`: Migrate the GitHub mirror script to `H2`
 27. `UR`: Verify and confirm final configuration
