@@ -105,17 +105,17 @@ this node before performing the rest of the migration.
 ### Part 5. Flag Day: Move GPU Nodes and Copy Disks (2023-05-09)
 
 22. `UR`: **STOP USING `H1` FOR ALL JOBS**
-22. Repeat step (20), but for `RG`
-23. `LP`: Copy the contents of `H1` disks to `H2`:
+23. Repeat step (20), but for `RG`
+24. `LP`: Copy the contents of `H1` disks to `H2`:
      1. Copy `H1`'s `/home` into `H2` `/scratch/sapling1/home`
      1. Copy `H1`'s `/scratch` into `H2` `/scratch/sapling1/scratch`
      1. Copy `H1`'s `/scratch2` into `H2` `/scratch/sapling1/scratch2`
-24. `UR`: **CAN BEGIN USE OF `H2`**
+25. `UR`: **CAN BEGIN USE OF `H2`**
 
 ### Part 5. Final Migration Steps
 
-25. `LP`: Migrate the GitHub mirror script to `H2`
-26. `UR`: Verify and confirm final configuration
-27. `CS`: Make `H2` available under sapling.stanford.edu
-28. `LP`/`UR`: Verify and confirm
-29. `CS`: `H1` can be decomissioned
+26. `LP`: Migrate the GitHub mirror script to `H2`
+27. `UR`: Verify and confirm final configuration
+28. `CS`: Make `H2` available under sapling.stanford.edu
+29. `LP`/`UR`: Verify and confirm
+30. `CS`: `H1` can be decomissioned
