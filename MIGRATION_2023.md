@@ -79,9 +79,9 @@ Machines:
 12. `LP`: Install HTTP server
 13. `LP`: Install module system
 
-### Part 3. Initial Migration Testing
+### Part 3. Initial Migration Testing (2023-05-02)
 
-Choose one compute node (probably a GPU node) to move over to the new
+Choose one compute node (`c0002`) to move over to the new
 `H2` configurations. Call this machine `CN`. We will test everything with
 this node before performing the rest of the migration.
 
@@ -92,7 +92,7 @@ this node before performing the rest of the migration.
 18. `LP`: Verify that jobs are able to be launched on `CN`
 19. `UR`: Verify `H2` and `CN` access and software
 
-### Part 4. Move CPU Nodes
+### Part 4. Move CPU Nodes (2023-05-04)
 
 20. For each CPU node `RC`:
      1. `CS`: Do **NOT** install a new base OS; we'll keep Ubuntu 20.04 on these nodes
@@ -102,7 +102,7 @@ this node before performing the rest of the migration.
      5. `LP`: Verify that jobs are able to be launched on `RC`
 21. `LP`: Re-enable CI jobs on `RC`
 
-### Part 5. Flag Day: Move GPU Nodes and Copy Disks
+### Part 5. Flag Day: Move GPU Nodes and Copy Disks (2023-05-09)
 
 22. `UR`: **STOP USING `H1` FOR ALL JOBS**
 22. Repeat step (20), but for `RG`
