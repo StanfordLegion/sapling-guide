@@ -92,7 +92,7 @@ Sapling consists of four sets of nodes:
 <td>c0001 to c0004</td>
 <td>256 GB</td>
 <td>2x Intel Xeon CPU E5-2640 v4<br />
-(2x20 cores)</td>
+(2x10 cores)</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -100,7 +100,7 @@ Sapling consists of four sets of nodes:
 <td>g0001 to g0004</td>
 <td>256 GB</td>
 <td>2x Intel Xeon CPU E5-2640 v4<br />
-(2x20 cores)</td>
+(2x10 cores)</td>
 <td>4x Tesla P100 (Pascal)</td>
 </tr>
 <tr class="even">
