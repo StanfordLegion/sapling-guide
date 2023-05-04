@@ -81,10 +81,10 @@ Sapling consists of four sets of nodes:
 <tbody>
 <tr class="odd">
 <td>Head</td>
-<td>sapling</td>
-<td>96 GB</td>
-<td>Intel Xeon E5606<br />
-(4 cores)</td>
+<td>sapling2</td>
+<td>256 GB</td>
+<td>Intel Xeon Silver 4316<br />
+(20 cores)</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -105,7 +105,7 @@ Sapling consists of four sets of nodes:
 </tr>
 <tr class="even">
 <td>CI</td>
-<td>n0000 to n0004</td>
+<td>n0000 to n0002</td>
 <td>48 GB</td>
 <td>2x Intel Xeon X5680<br />
 (2x6 cores)</td>
@@ -133,8 +133,9 @@ To get started with the module system, we recommend adding the following
 to your `~/.bashrc`:
 
 ```bash
-module load mpi
 module load slurm
+module load mpi
+module load cmake
 ```
 
 Some additional modules are only available on the compute nodes. E.g.,
@@ -146,7 +147,7 @@ module load cuda
 
 ### 2. Launching Interactive Jobs with SLURM
 
-Because the hardware and software is different on different nodes, it is
+Because the hardware is different on different nodes, it is
 important to build and run all software on the compute nodes. On
 Sapling, we do this through the SLURM job scheduler.
 
@@ -208,18 +209,26 @@ c0002.stanford.edu
 
 ### 4. Workaround for MPI-SLURM incompatibility
 
-As of this current writing, MPI has not been built with SLURM
-compatibility enabled. That means that Legion, Regent and MPI jobs
-*cannot* be launched with `srun`. A workaround for this is to use
+**Note: this workaround is no longer required. MPI should now detect
+the SLURM job properly.**
+
+Previously, MPI had not been built with SLURM
+compatibility enabled. That meant that Legion, Regent and MPI jobs
+could not be launched with `srun`. A workaround for this was to use
 `mpirun` instead. For example, in a 2 node job, you might do:
 
 ```bash
 mpirun -n 2 -npernode 1 -bind-to none ...
 ```
 
-Note: Continue to follow the same instructions above for either using
-`salloc` or `sbatch`. The difference is to use `mpirun` instead of
-`srun` to launch the job.
+Now, instead of doing this, you can simply do:
+
+```bash
+srun -n 2 -N 2 -c 40 ...
+```
+
+(Note: the `-c 40` is required to make sure your job is given access
+to all the cores on the node.)
 
 ### 5. Spack
 
@@ -285,9 +294,11 @@ systemctl start nvidia-persistenced.service
 We can do this ourselves. Note: for the driver, see above.
 
 ```bash
-admin/install_cuda_toolkit.sh
-admin/install_cudnn.sh # note: requires download (see script)
-sudo cp admin/cuda/modules/11.7 /usr/local/modules/cuda/
+cd admin/cuda
+./install_cuda_toolkit.sh
+./install_cudnn.sh # note: requires download (see script)
+cd ../modules
+./setup_modules.sh
 ```
 
 ### 3. Upgrade Linux Kernel (or System Software)
@@ -309,7 +320,8 @@ sudo reboot
 We are responsible for maintaining Docker on the compute nodes.
 
 ```bash
-admin/install_docker.sh
+cd admin
+./install_docker.sh
 ```
 
 Do **NOT** add users to to the `docker` group. This is equivalent to
@@ -420,15 +432,6 @@ aggressive settings:
   * Otherwise, contact `action@cs`. It may be that there is a hardware
     issue preventing the node from coming back up.
 
-**After rebooting a compute node** be sure to check the SLURM daemon
-status to make sure it is up. (Usually it is not and has to be started
-manually.)
-
-```bash
-sudo service slurmd status
-sudo service slurmd start # if necessary
-```
-
 ### 7. Manage SLURM Node State
 
 Check the state of SLURM nodes with:
@@ -440,7 +443,7 @@ sinfo
 To set the SLURM state of a node to `S`:
 
 ```bash
-sudo /usr/local/slurm-20.11.4/bin/scontrol update NodeName=c0001 State=S
+sudo /usr/local/slurm-23.02.1/bin/scontrol update NodeName=c0001 State=S
 ```
 
 Here are some states you might find useful:
