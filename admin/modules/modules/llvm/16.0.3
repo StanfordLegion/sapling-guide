@@ -1,0 +1,7 @@
+#%Module 1.0
+
+set llvm_root /usr/local/llvm-16.0.3
+
+# prepend because LLVM is often installed in /usr/bin/... as well
+prepend-path PATH ${llvm_root}/bin
+append-path CMAKE_PREFIX_PATH ${llvm_root}
