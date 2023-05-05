@@ -4,7 +4,7 @@ set -e
 
 if [[ ! -f llvm-project-16.0.3.src.tar.xz ]]; then
     wget https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.3/llvm-project-16.0.3.src.tar.xz
-    echo "3b12e35332e10cf650578ae18247b91b04926d5427e1a6ae9a51d170a47cfbb2  llvm-project-16.0.3.src.tar.xz" | echo shasum -c
+    echo "3b12e35332e10cf650578ae18247b91b04926d5427e1a6ae9a51d170a47cfbb2  llvm-project-16.0.3.src.tar.xz" | shasum -c
     tar xf llvm-project-16.0.3.src.tar.xz
 fi
 
