@@ -12,7 +12,7 @@ if [[ ! -d /usr/local/llvm-16.0.3 ]]; then
     llvm_config_flags=(
         -DCMAKE_INSTALL_PREFIX=/usr/local/llvm-16.0.3
         -DCMAKE_BUILD_TYPE=Release
-        -DLLVM_ENABLE_PROJECTS=clang;lld
+        -DLLVM_ENABLE_PROJECTS="clang;lld"
         -DLLVM_ENABLE_RUNTIMES=libunwind
         -DLLVM_ENABLE_TERMINFO=OFF
         -DLLVM_ENABLE_LIBEDIT=OFF
