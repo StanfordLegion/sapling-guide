@@ -17,4 +17,4 @@ sudo adduser --no-create-home $uid
 
 # mkhomedir_helper refuses to do anything on an existing directory, so
 # we've got to do this ourselves
-sudo cp -rv /etc/skel/. /home/$uid
+sudo -u $uid cp -rv /etc/skel/. /home/$uid
