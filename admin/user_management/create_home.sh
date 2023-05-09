@@ -10,7 +10,7 @@ if [[ -z $uid ]]; then
 fi
 
 sudo zfs create home/$uid
-sudo zfs set quota=500G home/$uid
+sudo zfs set quota=100G home/$uid
 sudo chown $uid:$uid /home/$uid
-sudo chmod 750 /home/$uid
+sudo chmod 755 /home/$uid
 sudo chmod g+s /home/$uid
