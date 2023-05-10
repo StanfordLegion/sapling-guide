@@ -11,7 +11,7 @@ Please follow these steps when you first set up your Sapling account.
 ### 1. How to SSH
 
 ```bash
-ssh username@sapling.stanford.edu
+ssh username@sapling2.stanford.edu
 ```
 
 ### 2. Change your Password
@@ -46,7 +46,7 @@ Regent on Sapling.
 
 ```bash
 git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
+srun -n 1 -N 1 -c 40 -p gpu --exclusive --pty bash --login
 module load cuda
 cd legion/examples/circuit
 LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
@@ -57,10 +57,10 @@ LG_RT_DIR=$PWD/../../runtime USE_CUDA=1 make -j20
 
 ```bash
 git clone -b master https://github.com/StanfordLegion/legion.git
-srun -N 1 -p gpu --exclusive --pty bash --login
-module load cuda
+srun -n 1 -N 1 -c 40 -p gpu --exclusive --pty bash --login
+module load cmake cuda llvm
 cd legion/language
-CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.py --debug --cuda
+./install.py --debug --cuda
 ./regent.py examples/circuit_sparse.rg -fcuda 1 -ll:gpu 1
 ```
 
@@ -173,6 +173,27 @@ df -h $HOME
 
 Some things to keep in mind while using the machine:
 
+### 0. Hardware Differences
+
+As of the May 2023 upgrade, we now maintain uniform software across
+the machine (e.g., the module system below, and the base OS). However,
+the head node and compute nodes still use different generations of
+Intel CPUs. It is usually possible to build compatible software, as
+long as you do not specify an `-march=native` flag (or similar) while
+building. **However, note that Legion and Regent set `-march=native`
+by default and should not be expected to work.** There are two
+possible solutions to this:
+
+ 1. Build on a compute node. (See below for how to launch an
+    interactive job.)
+
+ 2. Disable `-march=native`.
+
+    * For Legion, with Make build system: set `MARCH=broadwell`
+    * For Legion, with CMake build system: set `-DBUILD_MARCH=broadwell`
+    * For Regent: requires modifications to Terra, so it is easiest to
+      follow (1) above.
+
 ### 1. Module System
 
 Sapling has a very *minimal* module system. The intention is to provide
@@ -183,23 +204,22 @@ To get started with the module system, we recommend adding the following
 to your `~/.bashrc`:
 
 ```bash
-module load slurm
-module load mpi
-module load cmake
+module load slurm mpi cmake
 ```
 
-Some additional modules are only available on the compute nodes. E.g.,
-on the GPU nodes, CUDA is available via:
+If you wish to use CUDA, you may also add:
 
 ```bash
 module load cuda
 ```
 
-### 2. Launching Interactive Jobs with SLURM
+Note: as of the May 2023 upgrade, we now maintain a uniform module
+system across the machine. All modules should be available on all
+nodes. For example, CUDA is available even on nodes without a GPU,
+including the head node. This should make it easier to build software
+that runs across the entire cluster.
 
-Because the hardware is different on different nodes, it is
-important to build and run all software on the compute nodes. On
-Sapling, we do this through the SLURM job scheduler.
+### 2. Launching Interactive Jobs with SLURM
 
 To launch an interactive, single-node job (e.g., for building software):
 
@@ -215,7 +235,9 @@ Here's a break-down of the parts in this command:
   * `-n 1` (a.k.a., `--ntasks 1`): we're going to run one "task". This
     is the number of processes to launch. In this case because we only
     want one copy of bash to be running.
-  * `-c 40` (a.k.a., `--cpus-per-task 40`): the number of CPUs per task.
+  * `-c 40` (a.k.a., `--cpus-per-task 40`): the number of CPUs per
+    task. This is important, or else your job will be bound to a
+    single core.
   * `-p cpu` (a.k.a., `--partition cpu`): select the CPU
     partition. (Change to `gpu` if you want to use GPU nodes, or skip
     if you don't care.)
