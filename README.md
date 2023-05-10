@@ -128,6 +128,7 @@ nodes in the cluster.
   <thead>
     <tr class="header">
       <th>Path</th>
+      <th>Filesystem</th>
       <th>Total Capacity</th>
       <th>Quota</th>
       <th>Replication Factor</th>
@@ -136,18 +137,21 @@ nodes in the cluster.
   <tbody>
     <tr class="odd">
       <td><code>/home</code></td>
+      <td>ZFS</td>
       <td>7 TiB</td>
       <td>100 GiB</td>
       <td>2x</td>
     </tr>
     <tr class="even">
       <td><code>/scratch</code></td>
+      <td>ZFS</td>
       <td>7 TiB</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr class="odd">
       <td><code>/scratch2</code></td>
+      <td>ZFS</td>
       <td>7 TiB</td>
       <td>None</td>
       <td>None</td>
