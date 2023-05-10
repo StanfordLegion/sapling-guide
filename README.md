@@ -69,55 +69,101 @@ CMAKE_PREFIX_PATH=/scratch2/eslaught/sw/llvm/llvm-11/install_g_nodes ./install.p
 Sapling consists of four sets of nodes:
 
 <table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Name</th>
-<th>Memory</th>
-<th>CPU (Cores)</th>
-<th>GPU</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Head</td>
-<td>sapling2</td>
-<td>256 GB</td>
-<td>Intel Xeon Silver 4316<br />
-(20 cores)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>CPU</td>
-<td>c0001 to c0004</td>
-<td>256 GB</td>
-<td>2x Intel Xeon CPU E5-2640 v4<br />
-(2x10 cores)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>GPU</td>
-<td>g0001 to g0004</td>
-<td>256 GB</td>
-<td>2x Intel Xeon CPU E5-2640 v4<br />
-(2x10 cores)</td>
-<td>4x Tesla P100 (Pascal)</td>
-</tr>
-<tr class="even">
-<td>CI</td>
-<td>n0000 to n0002</td>
-<td>48 GB</td>
-<td>2x Intel Xeon X5680<br />
-(2x6 cores)</td>
-<td>2x Tesla C2070 (Fermi)</td>
-</tr>
-</tbody>
+  <thead>
+    <tr class="header">
+      <th>Type</th>
+      <th>Name</th>
+      <th>Memory</th>
+      <th>CPU (Cores)</th>
+      <th>GPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td>Head</td>
+      <td>sapling2</td>
+      <td>256 GB</td>
+      <td>Intel Xeon Silver 4316<br />
+        (20 cores)</td>
+      <td></td>
+    </tr>
+    <tr class="even">
+      <td>CPU</td>
+      <td>c0001 to c0004</td>
+      <td>256 GB</td>
+      <td>2x Intel Xeon CPU E5-2640 v4<br />
+        (2x10 cores)</td>
+      <td></td>
+    </tr>
+    <tr class="odd">
+      <td>GPU</td>
+      <td>g0001 to g0004</td>
+      <td>256 GB</td>
+      <td>2x Intel Xeon CPU E5-2640 v4<br />
+        (2x10 cores)</td>
+      <td>4x Tesla P100 (Pascal)</td>
+    </tr>
+    <tr class="even">
+      <td>CI</td>
+      <td>n0000 to n0002</td>
+      <td>48 GB</td>
+      <td>2x Intel Xeon X5680<br />
+        (2x6 cores)</td>
+      <td>2x Tesla C2070 (Fermi)</td>
+    </tr>
+  </tbody>
 </table>
 
 When you log in, you'll get to the head node. Note that, because it uses
 a different architecture from the CPU/GPU nodes, it is probably best to
 use one of those nodes to build and run your software. (See below for
 machine access instructions.)
+
+## Filesystems
+
+The following filesystems are mounted on NFS and are available on all
+nodes in the cluster.
+
+<table>
+  <thead>
+    <tr class="header">
+      <th>Path</th>
+      <th>Total Capacity</th>
+      <th>Quota</th>
+      <th>Replication Factor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td><code>/home</code></td>
+      <td>7 TiB</td>
+      <td>100 GiB</td>
+      <td>2x</td>
+    </tr>
+    <tr class="even">
+      <td><code>/scratch</code></td>
+      <td>7 TiB</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr class="odd">
+      <td><code>/scratch2</code></td>
+      <td>7 TiB</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+
+Please note that `/home` has a quota. Larger files may be placed on
+`/scratch` or `/scratch2`, but please be careful about disk usage. If
+your usage is excessive, you may be contacted to reduce it.
+
+You may check your `/home` quota usage with:
+
+```bash
+df -h $HOME
+```
 
 ## Using the Machine
 
