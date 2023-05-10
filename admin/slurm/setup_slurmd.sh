@@ -34,6 +34,7 @@ fi
 popd
 
 sudo cp slurm.conf /etc/slurm.conf
+sudo cp gres.conf /etc/gres.conf
 
 sudo mkdir -p /var/spool/slurmd
 sudo chown slurm:slurm /var/spool/slurmd
