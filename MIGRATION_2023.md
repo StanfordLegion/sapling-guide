@@ -108,8 +108,8 @@ this node before performing the rest of the migration.
 23. Repeat step (20), but for `RG`
 24. `LP`: Copy the contents of `H1` disks to `H2`:
      1. Copy `H1`'s `/home` into `H2` `/scratch/sapling1/home`
-     1. Copy `H1`'s `/scratch` into `H2` `/scratch/sapling1/scratch`
-     1. Copy `H1`'s `/scratch2` into `H2` `/scratch/sapling1/scratch2`
+     1. ~~Copy `H1`'s `/scratch` into `H2` `/scratch/sapling1/scratch`~~
+     1. ~~Copy `H1`'s `/scratch2` into `H2` `/scratch/sapling1/scratch2`~~
 25. `UR`: **CAN BEGIN USE OF `H2`**
 
 ### Part 6. Final Migration Steps
