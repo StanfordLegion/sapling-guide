@@ -1,0 +1,10 @@
+#%Module 1.0
+
+conflict hdf5
+
+set hdf5_root /usr/local/hdf5-1.14.1-2
+
+# prepend because HDF5 is often installed in /usr/bin/... as well
+prepend-path PATH ${hdf5_root}/bin
+append-path LD_LIBRARY_PATH ${hdf5_root}/lib
+append-path CMAKE_PREFIX_PATH ${hdf5_root}
