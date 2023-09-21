@@ -11,7 +11,7 @@ Please follow these steps when you first set up your Sapling account.
 ### 1. How to SSH
 
 ```bash
-ssh username@sapling2.stanford.edu
+ssh username@sapling.stanford.edu
 ```
 
 ### 2. Change your Password
@@ -81,7 +81,7 @@ Sapling consists of four sets of nodes:
   <tbody>
     <tr class="odd">
       <td>Head</td>
-      <td>sapling2</td>
+      <td>sapling</td>
       <td>256 GB</td>
       <td>Intel Xeon Silver 4316<br />
         (20 cores)</td>
