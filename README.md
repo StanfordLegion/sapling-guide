@@ -443,7 +443,7 @@ Relocate Docker's internal storage into `/tmp/$USER` to avoid issues
 with NFS:
 
 ```bash
-mkdir /tmp/$USER
+mkdir -p /tmp/$USER
 mkdir -p ~/.config/docker
 echo '{"data-root":"/tmp/'$USER'"}' > ~/.config/docker/daemon.json
 systemctl --user stop docker
