@@ -444,6 +444,7 @@ with NFS:
 
 ```bash
 mkdir /tmp/$USER
+mkdir -p ~/.config/docker
 echo '{"data-root":"/tmp/'$USER'"}' > ~/.config/docker/daemon.json
 systemctl --user stop docker
 systemctl --user start docker
