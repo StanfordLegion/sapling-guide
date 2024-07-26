@@ -32,10 +32,84 @@ cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 
 ### 4. Questions? Ask on Zulip
 
-We have a `#sapling` stream on Zulip. If you have any questions, that's
+We have a `#sapling` channel on Zulip. If you have any questions, that's
 the best place to ask. Also, that is where we will provide announcements
 when there are changes, maintenance, etc. for the machine. (Please ask
 for the signup link if you are not already on our Zulip instance.)
+
+## Etiquette
+
+Sapling is a shared research machine and therefore may work
+differently than other machines you are used to. While the rules on
+Sapling are intentionally flexible (to allow a broad range of research
+to be performed), it is still important to understand how your usage
+of the machine impacts other users and to share the machine well so
+that everyone can get their work done.
+
+Here are some guidelines that we adhere to when using Sapling:
+
+ 1. The head node is a shared resource. Do NOT run compute- or
+    memory-intensive workloads there.
+
+      * Builds are fine as long as they don't go on too long and you
+        use a reasonable parallelism setting (e.g., `make -j16`). For
+        longer builds consider launching an interactive job (see
+        below).
+
+      * If you start a long-running process like an IDE, please make
+        sure it doesn't use too much memory, as this will cut into the
+        available memory for everyone else.
+
+ 2. Allocate compute nodes through SLURM. Do NOT directly SSH to a
+    compute node:
+
+      * Do this: `srun -N 1 -n 1 -c 40 -p gpu --pty bash --login`
+      * Don't do this: `ssh g0001`
+
+    If for some reason you need SSH, then allocate the node through
+    `salloc` before you SSH to it:
+
+    ```
+    salloc -n 1 -N 1 -c 40 -p gpu --exclusive
+    ssh $SLURM_NODELIST
+    ```
+
+    Be sure to close out your session when you are done with it so
+    that the nodes are returned to the queue.
+
+ 3. You are responsible for your usage of the machine. Keep track of
+    your jobs and make sure they are running as expected. If you
+    intend to run something for a long time (say, more than 4 hours),
+    it's a good idea to let everyone know on the `#sapling` channel on
+    Zulip. This is especially true if you intend to do performance
+    experiments for a paper, so that we know not to interrupt your
+    jobs.
+
+      * You can say: "I'm going to be running experiments on 2 GPU
+        nodes for 8 hours. Please don't interrupt my jobs if you see
+        them in the queue."
+
+      * You can also set limits on your jobs to make sure they don't
+        hang indefinitely. When you run `sbatch`, `salloc` or `srun`,
+        you can add the flag `--time=HH:MM:SS` to specify a maximum
+        running time of `HH` hours, `MM` minutes and `SS` seconds.
+
+ 4. If something goes wrong, we will contact you on Zulip. For
+    example, if we see a job has been running a long time, we might
+    double check that this is intentional and not the result of an
+    unintended hang. Other users may also contact you if you are using
+    a lot of resources and they can't get work done. Please respond to
+    them (and to us) so that we can coordinate usage of the
+    machine. **If you do not respond we may kill your jobs, especially
+    if they use excessive resources. Be sure to respond so we know
+    what you are doing.**
+
+ 5. Please avoid excessive usage of the machine. For example, using
+    all 4 GPU nodes for many hours is not very reasonable, as it will
+    block all other users from using GPUs. If you need to do so for an
+    experiment, please let us know on `#sapling` so we can talk about
+    it and schedule the experiment to avoid preventing other users
+    from doing their work.
 
 ## Quickstart
 
