@@ -87,7 +87,7 @@ Here are some guidelines that we adhere to when using Sapling:
 
       * You can say: "I'm going to be running experiments on 2 GPU
         nodes for 8 hours. Please don't interrupt my jobs if you see
-        them in the queue."
+        them in the queue, and let me know if there any problems."
 
       * You can also set limits on your jobs to make sure they don't
         hang indefinitely. When you run `sbatch`, `salloc` or `srun`,
