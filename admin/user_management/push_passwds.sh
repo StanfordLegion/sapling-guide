@@ -5,7 +5,7 @@ root_dir=$(readlink -f $(dirname "${BASH_SOURCE[0]}"))
 #set -e
 #set -x
 
-NODES="n0000 n0001 n0002"
+NODES="n0000 n0001"
 NODES+=" c0001 c0002 c0003 c0004"
 NODES+=" g0001 g0002 g0003 g0004"
 
