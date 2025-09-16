@@ -1,0 +1,15 @@
+#%Module 1.0
+
+if { [uname machine] == "x86_64" } {
+  set libdir "lib64"
+} else {
+  set libdir "lib"
+}
+
+conflict cuda
+
+set cuda_root /usr/local/cuda-12.9
+
+setenv CUDA ${cuda_root}
+append-path PATH ${cuda_root}/bin
+append-path LD_LIBRARY_PATH ${cuda_root}/${libdir}
